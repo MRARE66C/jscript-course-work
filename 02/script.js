@@ -122,3 +122,162 @@ const isCentralEurope = neighbours.includes("Germany")
 neighbours[neighbours.indexOf("China")] = "RPC";
 
 console.log(neighbours);
+
+//CHALLENGE #2
+
+console.log("Challenge #2");
+
+// function calcTip(billVal) {
+//   if (billVal >= 50 && billVal <= 300) {
+//     return billVal * 0.15;
+//   } else if (billVal > 300) {
+//     return billVal * 0.2;
+//   } else {
+//     return 0;
+//   }
+// }
+
+const calcTip = (billVal) =>
+  billVal >= 50 && billVal <= 300
+    ? billVal * 0.15
+    : billVal > 300
+    ? billVal * 0.2
+    : 0;
+
+const bill = [125, 555, 44];
+let tips = [];
+
+for (let i = 0; i < bill.length; i++) {
+  tips.push(calcTip(bill[i]));
+}
+
+let totals = [];
+
+for (let i = 0; i < tips.length; i++) {
+  totals.push(tips[i] + bill[i]);
+}
+
+console.log(tips);
+console.log(totals);
+
+//Introduction to Objects
+
+const myCountry = {
+  country: "Thailand",
+  capital: "Bangkok",
+  language: "Thai",
+  population: 71.7,
+  neighbours: ["Laos", "Myanmar", "Cambodia", "Malaysia"],
+  describe: function () {
+    console.log(
+      `${this.country} has ${this.population} million ${this.language}-speaking people, ${this.neighbours.length} neighbouring countries and a capital called ${this.capital}`
+    );
+  },
+  checkIsland: function () {
+    this.isIsland = this.neighbours.length === 0 ? true : false;
+  },
+};
+
+myCountry.describe();
+myCountry.checkIsland();
+
+console.log(myCountry);
+
+//CHALLENGE #3
+
+console.log("CHALLENGE #3");
+
+const john = {
+  fullName: "John Smith",
+  mass: 92,
+  heigth: 1.95,
+  caclBMI: function () {
+    this.bmi = this.mass / (this.heigth * this.heigth);
+    return this.bmi;
+  },
+};
+
+const mark = {
+  fullName: "Mark Miller",
+  mass: 78,
+  heigth: 1.69,
+  caclBMI: function () {
+    this.bmi = this.mass / (this.heigth * this.heigth);
+    return this.bmi;
+  },
+};
+
+console.log("john bmi", john.caclBMI());
+console.log("mark bmi", mark.caclBMI());
+
+const higherBMI =
+  john.bmi > mark.bmi
+    ? console.log(
+        `${john.fullName}'s BMI (${john.bmi}) is higher than ${mark.fullName}'s (${mark.bmi})!`
+      )
+    : console.log(
+        `${mark.fullName}'s BMI (${mark.bmi}) is higher than ${john.fullName}'s (${john.bmi})!`
+      );
+
+//Iteration: The for Loop
+
+// for (let i = 1; i <= 50; i++) {
+//   console.log(`Voter number ${i} is currently voting`);
+// }
+
+//Looping Arrays, Breaking and Continuing
+
+let percentages2 = [];
+
+for (let i = 0; i < population.length; i++) {
+  percentages2.push(percentageOfWorld1(population[i]));
+}
+
+console.log(percentages);
+console.log(percentages2);
+
+//Looping Backwards and Loops in Loops
+
+const listOfNeighbours = [
+  ["Canada", "Mexico"],
+  ["Spain"],
+  ["Norway", "Sweden", "Russia"],
+];
+
+for (let i = 0; i < listOfNeighbours.length; i++) {
+  for (let j = 0; j < listOfNeighbours[i].length; j++) {
+    console.log(`Neighbour: ${listOfNeighbours[i][j]}`);
+  }
+}
+
+//The while Loop
+
+let percentages3 = [];
+let i = 0;
+
+while (percentages3.length < population.length) {
+  percentages3.push(percentageOfWorld1(population[i]));
+  i++;
+}
+
+console.log(percentages);
+console.log(percentages2);
+console.log(percentages3);
+
+//CHALLENGE #4
+console.log("CHALLENGE #4");
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+const tips0 = [];
+const totals0 = [];
+
+for (let i = 0; i < bills.length; i++) {
+  const tempTip = calcTip(bills[i]);
+  tips0.push(tempTip);
+  totals0.push(tempTip + bills[i]);
+}
+
+console.log(bills);
+console.log(tips0);
+console.log(totals0);
