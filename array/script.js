@@ -61,10 +61,14 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovements = function (accs) {
+const displayMovements = function (accs, sort = false) {
   containerMovements.innerHTML = "";
 
-  accs.movements.forEach(function (mov, i) {
+  const movs = sort
+    ? accs.movements.slice().sort((a, b) => a - b)
+    : accs.movements;
+
+  movs.forEach(function (mov, i) {
     const isDeposit = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `
@@ -127,6 +131,7 @@ const updateDisplay = function (acc) {
 createUsernames(accounts);
 
 let currAccount;
+let sorted = false;
 
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
@@ -167,3 +172,50 @@ btnTransfer.addEventListener("click", function (e) {
     inputTransferAmount.value = inputTransferTo.value = "";
   }
 });
+
+btnClose.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currAccount.username &&
+    Number(inputClosePin.value) === currAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currAccount.username
+    );
+
+    accounts.splice(index, 1);
+
+    containerApp.style.opacity = 0;
+    inputLoginUsername.value = inputLoginPin.value = "";
+  }
+});
+
+btnLoan.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  const isAbleToLoan = currAccount.movements.some((mov) => mov >= amount * 0.1);
+
+  console.log(amount, isAbleToLoan);
+
+  if (isAbleToLoan && amount > 0) {
+    currAccount.movements.push(amount);
+
+    inputLoanAmount.value = "";
+  }
+  updateDisplay(currAccount);
+});
+
+btnSort.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  displayMovements(currAccount, !sorted);
+  sorted = !sorted;
+});
+
+const diceRolls = Array.from({ length: 100 }, () =>
+  Math.floor(Math.random() * 6 + 1)
+);
+
+console.log(diceRolls);
